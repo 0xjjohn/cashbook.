@@ -1,4 +1,3 @@
-/* دفتر - خدمة التشغيل بدون إنترنت. غيّر رقم النسخة لما تحدّث الملفات عشان الموبايل ياخد التحديث. */
 const VERSION = "dafter-v7";
 const FILES = ["./", "index.html", "manifest.webmanifest", "icons/icon-192.png", "icons/icon-512.png", "icons/maskable-512.png", "icons/apple-touch-icon.png"];
 
