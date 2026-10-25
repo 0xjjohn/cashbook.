@@ -1,6 +1,6 @@
 <div align="center">
 
-# دفتر · DafteR
+# دفتر · Dftr
 
 **A personal budget app that works in Arabic and English, right from your phone's home screen.**
 **تطبيق ميزانية شخصية بالعربي والإنجليزي، يشتغل من شاشة موبايلك الرئيسية.**
