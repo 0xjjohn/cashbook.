@@ -10,8 +10,8 @@
 <meta name="apple-mobile-web-app-title" content="cashbook">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="manifest" href="manifest.webmanifest">
-<link rel="icon" type="image/png" href="icons/icon-192.png?v=4">
-<link rel="apple-touch-icon" href="icons/apple-touch-icon.png?v=4">
+<link rel="icon" type="image/png" href="icons/icon-192.png?v=5">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png?v=5">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&family=Noto+Sans+Arabic:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&family=Noto+Sans+Arabic:wght@400;500;600;700;800&display=swap"></noscript>
@@ -264,6 +264,11 @@ button.pr-row:hover,a.pr-row:hover{background:var(--accent-soft)}
 .ob-dot{width:8px;height:8px;border-radius:4px;background:var(--line);padding:0;transition:width .2s,background-color .2s}
 .ob-dot[aria-current="true"]{width:24px;background:var(--ink)}
 .ob-act{display:grid;gap:12px;padding:10px 22px max(22px,env(safe-area-inset-bottom));width:100%;box-sizing:border-box;max-width:440px;margin-inline:auto}
+.intro{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:flex-end;padding:0 28px 36px;box-sizing:border-box}
+.intro-bar{display:block;width:44px;height:5px;border-radius:3px;background:var(--money);margin-bottom:22px}
+.intro h1{margin:0;font-size:2.75rem;line-height:1.15;font-weight:800;letter-spacing:-.02em;text-wrap:balance}
+:root[dir="rtl"] .intro h1{letter-spacing:0;line-height:1.3}
+.intro p{margin:16px 0 0;color:var(--muted);font-size:1.0625rem;line-height:1.7;max-width:30ch}
 .lg-btn.alt{background:var(--surface2);color:var(--ink)}
 .lg-top{display:flex;align-items:center;justify-content:space-between;min-height:42px}
 .lg-back{display:inline-flex;align-items:center;gap:2px;min-height:42px;padding-inline:0 8px;font-size:0.9375rem;font-weight:600}
@@ -1982,40 +1987,13 @@ function lgField(id,name,type,ph,val,ico,ac,eye){
     (eye?'<button class="lg-eye" type="button" data-act="gate-eye" data-for="'+id+'" aria-label="'+esc(t("showPw"))+'" aria-pressed="false">'+EYE+'</button>':'')+'</div>';
 }
 function obRows(a){return a.map(function(r){return '<div class="obr">'+r+'</div>';}).join("");}
-function obSlides(){
-  var cats=[["obC1","640"],["obC2","220"],["obC3","45"]];
-  var s1='<div class="obc"><small>'+t("obLeft")+'</small><div class="obn"><span class="n">8,385</span></div>'+
-    '<div class="alloc"><i class="p1" style="width:38%"></i><i class="p2" style="width:24%"></i><i class="p3" style="width:12%"></i><i class="p4" style="width:26%"></i></div>'+
-    cats.map(function(c){return '<div class="obr"><b>'+t(c[0])+'</b><span class="n">−'+c[1]+'</span></div>';}).join("")+'</div>';
-  var s2='<div class="obc">'+
-    '<div class="obr"><span class="obk ok">'+ICON.check+'</span><div class="obt"><b>'+t("obB1")+'</b><small>'+t("obPaid")+'</small></div><span class="n">450</span></div>'+
-    '<div class="obr"><span class="obk"></span><div class="obt"><b>'+t("obB2")+'</b><small>'+t("obIn3")+'</small></div><span class="n">180</span></div>'+
-    '<div class="obr"><span class="switch" aria-checked="true" aria-hidden="true"></span><div class="obt"><b>'+t("obB3")+'</b><small>'+t("obMon")+'</small></div><span class="n">165</span></div></div>';
-  var s3='<div class="obc"><div class="obl"><span class="obq r"></span>'+t("obSp")+'<span class="obq d"></span>'+t("obBud")+'</div>'+
-    '<svg class="obg" viewBox="0 0 280 130" preserveAspectRatio="none" aria-hidden="true"><line class="bud" x1="0" y1="18" x2="280" y2="18"/>'+
-    '<path class="ar" d="M0 120 L0 112 L50 108 L90 92 L130 96 L180 62 L220 58 L280 40 L280 120Z"/>'+
-    '<polyline class="r" points="0,112 50,108 90,92 130,96 180,62 220,58 280,40" fill="none"/></svg></div>';
-  return [[s1,"obT1","obD1"],[s2,"obT2","obD2"],[s3,"obT3","obD3"]];
-}
 function renderIntro(g,canBack){
-  var rtl=LANG==="ar",sl=obSlides();
-  var h='<div class="lg lg3"><div class="lg-top">'+(canBack?'<button class="lg-back" type="button" data-act="gate-back">'+ICO_CHV+t("gBack")+'</button>':'<span class="lg-brand" role="img" aria-label="cashbook"><svg viewBox="0 0 436 616" fill="currentColor" aria-hidden="true"><circle cx="38" cy="153" r="38"/><circle cx="38" cy="213" r="38"/><circle cx="38" cy="273" r="38"/><circle cx="38" cy="333" r="38"/><circle cx="38" cy="393" r="38"/><circle cx="38" cy="453" r="38"/><circle cx="158" cy="518" r="38"/><circle cx="158" cy="578" r="38"/><circle cx="278" cy="518" r="38"/><circle cx="278" cy="578" r="38"/><circle cx="398" cy="393" r="38"/><circle cx="398" cy="453" r="38"/><circle cx="398" cy="153" r="38"/><circle cx="398" cy="213" r="38"/><circle cx="278" cy="38" r="38"/><circle cx="278" cy="98" r="38"/><circle cx="158" cy="38" r="38"/><circle cx="158" cy="98" r="38"/></svg></span>')+
-    '<button class="langbtn" type="button" data-act="lang" aria-label="'+esc(t("langLabel"))+'">'+(rtl?"EN":"AR")+'</button></div>'+
-    '<div class="ob" id="ob" tabindex="0">'+sl.map(function(x){return '<section class="ob-s"><div class="ob-v">'+x[0]+'</div><h2>'+t(x[1])+'</h2><p>'+t(x[2])+'</p></section>';}).join("")+'</div>'+
-    '<div class="ob-dots" role="tablist">'+sl.map(function(x,i){return '<button class="ob-dot" type="button" data-act="gate-ob" data-id="'+i+'" aria-label="'+(i+1)+'" aria-current="'+(i===G.ob)+'"></button>';}).join("")+'</div>'+
+  var h='<div class="lg lg3"><div class="lg-top">'+(canBack?'<button class="lg-back" type="button" data-act="gate-back">'+ICO_CHV+t("gBack")+'</button>':'<span></span>')+'</div>'+
+    '<div class="intro"><i class="intro-bar" aria-hidden="true"></i><h1>'+t("obT1")+'</h1><p>'+t("obD1")+'</p></div>'+
     '<div class="ob-act"><button class="lg-btn" type="button" data-act="gate-mode" data-id="up">'+t("acctGoUp")+'</button>'+
     '<button class="lg-btn alt" type="button" data-act="gate-mode" data-id="in">'+t("acctGoIn")+'</button>'+
     '<button class="link lg-skip" type="button" data-act="gate-skip">'+t("gSkip")+'</button></div></div>';
   g.innerHTML=h;
-  var o=document.getElementById("ob");
-  if(o){
-    o.scrollLeft=(rtl?-1:1)*G.ob*o.clientWidth;
-    o.addEventListener("scroll",function(){
-      var i=Math.max(0,Math.min(sl.length-1,Math.round(Math.abs(o.scrollLeft)/(o.clientWidth||1))));
-      if(i===G.ob)return;G.ob=i;
-      var ds=g.querySelectorAll(".ob-dot");for(var k=0;k<ds.length;k++)ds[k].setAttribute("aria-current",k===i?"true":"false");
-    },{passive:true});
-  }
 }
 function renderGate(){
   var g=gateEl();if(!g||g.hidden)return;
@@ -2026,7 +2004,7 @@ function renderGate(){
   if(md==="intro")md=G.mode="in";
   var canBack=ready&&!conf;
   var h='<div class="lg"><div class="lg-top">'+(canBack?'<button class="lg-back" type="button" data-act="gate-back">'+ICO_CHV+t("gBack")+'</button>':'<span></span>')+
-    '<button class="langbtn" type="button" data-act="lang" aria-label="'+esc(t("langLabel"))+'">'+(LANG==="ar"?"EN":"AR")+'</button></div><div class="lg-main">';
+    '</div><div class="lg-main">';
   var err='<p class="lg-err gerr" id="gErr" role="alert">'+esc(G.msg)+(G.msg&&G.det?' <small dir="ltr">('+esc(G.det)+')</small>':'')+'</p>'+(G.ok?'<p class="lg-ok gok" role="status">'+esc(G.ok)+'</p>':'');
   if(conf){
     h+='<h1 class="lg-h">'+t("conflictT")+'</h1><p class="lg-s">'+t("conflictNote")+'</p>'+
@@ -2109,7 +2087,6 @@ function gateAction(a,id,el){
     case "gate-skip":jset("dafter-guest",1);closeGate();break;
     case "gate-forgot":gateRead();G.mode="forgot";G.msg="";G.ok="";renderGate();break;
     case "gate-back":gateRead();G.msg="";G.ok="";if(G.mode==="forgot"){G.mode="in";renderGate();}else if(G.mode==="in"||G.mode==="up"){G.mode="intro";renderGate();}else{jset("dafter-guest",1);closeGate();}break;
-    case "gate-ob":var obE=document.getElementById("ob");if(obE)obE.scrollTo({left:(LANG==="ar"?-1:1)*(+id)*obE.clientWidth,behavior:"smooth"});break;
     case "gate-cfg":
       var raw=(document.getElementById("fbCfg")||{}).value||"",k=raw.match(/apiKey["']?\s*[:=]\s*["']([^"']+)["']/),p=raw.match(/projectId["']?\s*[:=]\s*["']([^"']+)["']/);
       if(!k||!p){G.msg=t("fbBad");renderGate();break;}

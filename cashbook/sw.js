@@ -1,7 +1,7 @@
 /* دفتر - خدمة التشغيل بدون إنترنت. غيّر رقم النسخة عند تحديث الملفات لكي يحصل الهاتف على التحديث. */
-const VERSION = "dafter-v86";
+const VERSION = "dafter-v87";
 const FONTS = "dafter-fonts";
-const FILES = ["./", "index.html", "privacy.html", "manifest.webmanifest", "icons/icon-192.png?v=4", "icons/icon-512.png?v=4", "icons/maskable-512.png?v=4", "icons/apple-touch-icon.png?v=4"];
+const FILES = ["./", "index.html", "privacy.html", "manifest.webmanifest", "icons/icon-192.png?v=5", "icons/icon-512.png?v=5", "icons/maskable-512.png?v=5", "icons/apple-touch-icon.png?v=5"];
 
 self.addEventListener("install", (e) => {
   e.waitUntil(caches.open(VERSION).then((c) => c.addAll(FILES.map((u) => new Request(u, { cache: "reload" })))).then(() => self.skipWaiting()));
